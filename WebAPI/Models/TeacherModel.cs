@@ -13,5 +13,6 @@ namespace WebAPI.Models
         public string? email { get; set; }
         [StringLength(20)]
         public string? phoneNumber { get; set; }
+        //public int? rate { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace WebAPI.Models
         [StringLength(50)]
         public string? grade { get; set; }
         [Required]
-        [StringLength(255)]
-        public string? place { get; set; }
+        public CountyModel county { get; set; } = null!;
+        public int countyId { get; set; }
         public DateTime date { get; set; }
         //connections
         [Required]
