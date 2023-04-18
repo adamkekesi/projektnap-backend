@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using WebAPI.Models;
 
 namespace WebAPI
 {
@@ -37,14 +38,14 @@ namespace WebAPI
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Entity<TeacherModel>()
-                .HasOne<LessonModel>(r => r.oil)
-                .WithMany(o => o.recipes);
+                .Entity<LessonModel>()
+                .HasOne<TeacherModel>(l => l.teacher)
+                .WithMany(t => t.lessons);
 
             modelBuilder
                 .Entity<LessonModel>()
-                .HasOne<StudentModel>(r => r.oil)
-                .WithMany(o => o.recipes);
+                .HasOne<StudentModel>(s => s.student)
+                .WithMany(l => l.lessons);
         }
     }
 }
