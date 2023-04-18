@@ -116,8 +116,25 @@ namespace WebAPI.Migrations
                 columns: new[] { "id", "name" },
                 values: new object[,]
                 {
-                    { 1, "Győr-Moson-Sopron" },
-                    { 2, "Pest" }
+                    { 1, "Bács-Kiskun" },
+                    { 2, "Baranya" },
+                    { 3, "Békés" },
+                    { 4, "Borsod-Abaúj-Zemplén" },
+                    { 5, "Csongrád" },
+                    { 6, "Fejér" },
+                    { 7, "Győr-Moson-Sopron" },
+                    { 8, "Hajdú-Bihar" },
+                    { 9, "Heves" },
+                    { 10, "Jász-Nagykun-Szolnok" },
+                    { 11, "Komárom-Esztergom" },
+                    { 12, "Nógrád" },
+                    { 13, "Pest" },
+                    { 14, "Somogy" },
+                    { 15, "Szabolcs-Szatmár-Bereg" },
+                    { 16, "Tolna" },
+                    { 17, "Vas" },
+                    { 18, "Veszprém" },
+                    { 19, "Zala" }
                 });
 
             migrationBuilder.InsertData(
@@ -135,7 +152,7 @@ namespace WebAPI.Migrations
                 columns: new[] { "id", "countyId", "email", "grade", "isOnline", "name", "phoneNumber", "price", "subject" },
                 values: new object[,]
                 {
-                    { 1, 1, "bela@gmail.com", "8. osztály", false, "Kis Béla", "06706666969", 2000, "matek" },
+                    { 1, 1, "bela@gmail.com", "8. osztály", false, "Kis Béla", "06706666969", 2000, "matek;angol;magyar;atomfizika" },
                     { 2, 2, "anna@gmail.com", "9. osztály", false, "Nagy Anna", "06304201234", 3000, "matek" }
                 });
 
@@ -144,11 +161,11 @@ namespace WebAPI.Migrations
                 columns: new[] { "id", "date", "studentId", "teacherId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1 },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 },
-                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 },
-                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 }
+                    { 1, new DateTime(2023, 3, 19, 17, 12, 49, 515, DateTimeKind.Local).AddTicks(4037), 1, 1 },
+                    { 2, new DateTime(2023, 2, 27, 14, 9, 49, 515, DateTimeKind.Local).AddTicks(4106), 2, 1 },
+                    { 3, new DateTime(2022, 8, 19, 3, 32, 49, 515, DateTimeKind.Local).AddTicks(4116), 3, 2 },
+                    { 4, new DateTime(2023, 7, 17, 16, 51, 49, 515, DateTimeKind.Local).AddTicks(4124), 2, 2 },
+                    { 5, new DateTime(2023, 5, 20, 19, 41, 49, 515, DateTimeKind.Local).AddTicks(4128), 3, 2 }
                 });
 
             migrationBuilder.CreateIndex(

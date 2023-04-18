@@ -11,7 +11,7 @@ using WebAPI;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230418094817_Initial")]
+    [Migration("20230418111849_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -40,12 +40,97 @@ namespace WebAPI.Migrations
                         new
                         {
                             id = 1,
-                            name = "Győr-Moson-Sopron"
+                            name = "Bács-Kiskun"
                         },
                         new
                         {
                             id = 2,
+                            name = "Baranya"
+                        },
+                        new
+                        {
+                            id = 3,
+                            name = "Békés"
+                        },
+                        new
+                        {
+                            id = 4,
+                            name = "Borsod-Abaúj-Zemplén"
+                        },
+                        new
+                        {
+                            id = 5,
+                            name = "Csongrád"
+                        },
+                        new
+                        {
+                            id = 6,
+                            name = "Fejér"
+                        },
+                        new
+                        {
+                            id = 7,
+                            name = "Győr-Moson-Sopron"
+                        },
+                        new
+                        {
+                            id = 8,
+                            name = "Hajdú-Bihar"
+                        },
+                        new
+                        {
+                            id = 9,
+                            name = "Heves"
+                        },
+                        new
+                        {
+                            id = 10,
+                            name = "Jász-Nagykun-Szolnok"
+                        },
+                        new
+                        {
+                            id = 11,
+                            name = "Komárom-Esztergom"
+                        },
+                        new
+                        {
+                            id = 12,
+                            name = "Nógrád"
+                        },
+                        new
+                        {
+                            id = 13,
                             name = "Pest"
+                        },
+                        new
+                        {
+                            id = 14,
+                            name = "Somogy"
+                        },
+                        new
+                        {
+                            id = 15,
+                            name = "Szabolcs-Szatmár-Bereg"
+                        },
+                        new
+                        {
+                            id = 16,
+                            name = "Tolna"
+                        },
+                        new
+                        {
+                            id = 17,
+                            name = "Vas"
+                        },
+                        new
+                        {
+                            id = 18,
+                            name = "Veszprém"
+                        },
+                        new
+                        {
+                            id = 19,
+                            name = "Zala"
                         });
                 });
 
@@ -76,35 +161,35 @@ namespace WebAPI.Migrations
                         new
                         {
                             id = 1,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            date = new DateTime(2023, 3, 19, 17, 12, 49, 515, DateTimeKind.Local).AddTicks(4037),
                             studentId = 1,
                             teacherId = 1
                         },
                         new
                         {
                             id = 2,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            date = new DateTime(2023, 2, 27, 14, 9, 49, 515, DateTimeKind.Local).AddTicks(4106),
                             studentId = 2,
                             teacherId = 1
                         },
                         new
                         {
                             id = 3,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            date = new DateTime(2022, 8, 19, 3, 32, 49, 515, DateTimeKind.Local).AddTicks(4116),
                             studentId = 3,
                             teacherId = 2
                         },
                         new
                         {
                             id = 4,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            date = new DateTime(2023, 7, 17, 16, 51, 49, 515, DateTimeKind.Local).AddTicks(4124),
                             studentId = 2,
                             teacherId = 2
                         },
                         new
                         {
                             id = 5,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            date = new DateTime(2023, 5, 20, 19, 41, 49, 515, DateTimeKind.Local).AddTicks(4128),
                             studentId = 3,
                             teacherId = 2
                         });
@@ -214,7 +299,7 @@ namespace WebAPI.Migrations
                             name = "Kis Béla",
                             phoneNumber = "06706666969",
                             price = 2000,
-                            subject = "matek"
+                            subject = "matek;angol;magyar;atomfizika"
                         },
                         new
                         {
