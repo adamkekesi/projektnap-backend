@@ -13,6 +13,7 @@ namespace WebAPI.Models
         public string? email { get; set; }
         [StringLength(20)]
         public string? phoneNumber { get; set; }
-
+        //connections
+        public IList<LessonModel>? lessons { get; set; }
     }
 }
