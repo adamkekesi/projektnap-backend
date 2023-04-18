@@ -37,18 +37,7 @@ namespace WebAPI
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // -------------- Connections Start -------------- //
-            // -- Zero or One to Many -- //
-            modelBuilder
-                .Entity<LessonModel>()
-                .HasOne<TeacherModel>(l => l.teacher)
-                .WithMany(t => t.lessons);
-
-            modelBuilder
-                .Entity<LessonModel>()
-                .HasOne<StudentModel>(s => s.student)
-                .WithMany(l => l.lessons);
-            // -------------- Connections End -------------- //
+            base.OnModelCreating(modelBuilder);
             // -------------- Seed Start -------------- //
             // -------------- Seed End -------------- //
         }

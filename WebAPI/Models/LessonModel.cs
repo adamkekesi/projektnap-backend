@@ -6,6 +6,7 @@ namespace WebAPI.Models
     {
         public int id { get; set; }
         public int price { get; set; }
+        public bool isOnline { get; set; }
         [Required]
         [StringLength(100)]
         public string? subject { get; set; }
@@ -18,8 +19,11 @@ namespace WebAPI.Models
         public DateTime date { get; set; }
         //connections
         [Required]
-        public StudentModel? student { get; set; }
+        public StudentModel student { get; set; } = null!;
+        public int studentId { get; set; }
+
         [Required]
-        public TeacherModel? teacher { get; set; }
+        public TeacherModel teacher { get; set; } = null!;
+        public int teacherId { get; set; }
     }
 }

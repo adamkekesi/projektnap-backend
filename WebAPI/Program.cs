@@ -1,3 +1,7 @@
+using WebAPI;
+using WebAPI.Services;
+using WebAPI.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddDbContext<DataContext>();
 var app = builder.Build();
 
 
