@@ -57,6 +57,13 @@ namespace WebAPI.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    price = table.Column<int>(type: "int", nullable: false),
+                    isOnline = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    subject = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    grade = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    countyId = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     email = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
@@ -67,6 +74,12 @@ namespace WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_teachers", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_teachers_counties_countyId",
+                        column: x => x.countyId,
+                        principalTable: "counties",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -76,13 +89,6 @@ namespace WebAPI.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    price = table.Column<int>(type: "int", nullable: false),
-                    isOnline = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    subject = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    grade = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    countyId = table.Column<int>(type: "int", nullable: false),
                     date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     studentId = table.Column<int>(type: "int", nullable: false),
                     teacherId = table.Column<int>(type: "int", nullable: false)
@@ -90,12 +96,6 @@ namespace WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_lessons", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_lessons_counties_countyId",
-                        column: x => x.countyId,
-                        principalTable: "counties",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_lessons_students_studentId",
                         column: x => x.studentId,
@@ -132,29 +132,24 @@ namespace WebAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "teachers",
-                columns: new[] { "id", "email", "name", "phoneNumber" },
+                columns: new[] { "id", "countyId", "email", "grade", "isOnline", "name", "phoneNumber", "price", "subject" },
                 values: new object[,]
                 {
-                    { 1, "bela@gmail.com", "Kis Béla", "06706666969" },
-                    { 2, "anna@gmail.com", "Nagy Anna", "06304201234" }
+                    { 1, 1, "bela@gmail.com", "8. osztály", false, "Kis Béla", "06706666969", 2000, "matek" },
+                    { 2, 2, "anna@gmail.com", "9. osztály", false, "Nagy Anna", "06304201234", 3000, "matek" }
                 });
 
             migrationBuilder.InsertData(
                 table: "lessons",
-                columns: new[] { "id", "countyId", "date", "grade", "isOnline", "price", "studentId", "subject", "teacherId" },
+                columns: new[] { "id", "date", "studentId", "teacherId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "8. osztály", false, 2000, 1, "matek", 1 },
-                    { 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "9. osztály", false, 3000, 2, "matek", 1 },
-                    { 3, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "12. osztály", false, 3000, 3, "fizika", 2 },
-                    { 4, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "egyetem", false, 5000, 2, "fizika", 2 },
-                    { 5, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bármelyik", false, 2000, 3, "tesi", 2 }
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1 },
+                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 },
+                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 },
+                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_lessons_countyId",
-                table: "lessons",
-                column: "countyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_lessons_studentId",
@@ -165,6 +160,11 @@ namespace WebAPI.Migrations
                 name: "IX_lessons_teacherId",
                 table: "lessons",
                 column: "teacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_teachers_countyId",
+                table: "teachers",
+                column: "countyId");
         }
 
         /// <inheritdoc />
@@ -174,13 +174,13 @@ namespace WebAPI.Migrations
                 name: "lessons");
 
             migrationBuilder.DropTable(
-                name: "counties");
-
-            migrationBuilder.DropTable(
                 name: "students");
 
             migrationBuilder.DropTable(
                 name: "teachers");
+
+            migrationBuilder.DropTable(
+                name: "counties");
         }
     }
 }

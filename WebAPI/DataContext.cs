@@ -43,8 +43,8 @@ namespace WebAPI
             base.OnModelCreating(modelBuilder);
             // -------------- Seed Start -------------- //
             modelBuilder.Entity<TeacherModel>().HasData(
-                   new TeacherModel() { id = 1, name = "Kis Béla", email = "bela@gmail.com", phoneNumber = "06706666969" },
-                   new TeacherModel() { id = 2, name = "Nagy Anna", email = "anna@gmail.com", phoneNumber = "06304201234" }
+                   new TeacherModel() { id = 1, name = "Kis Béla", price = 2000, subject = "matek", grade = "8. osztály", countyId = 1, email = "bela@gmail.com", phoneNumber = "06706666969" },
+                   new TeacherModel() { id = 2, name = "Nagy Anna", price = 3000, subject = "matek", grade = "9. osztály", countyId = 2, email = "anna@gmail.com", phoneNumber = "06304201234" }
                 );
 
 
@@ -60,11 +60,11 @@ namespace WebAPI
 
 
             modelBuilder.Entity<LessonModel>().HasData(
-                    new LessonModel() { id = 1, price = 2000, subject = "matek", grade = "8. osztály", countyId = 1, teacherId = 1, studentId = 1 },
-                    new LessonModel() { id = 2, price = 3000, subject = "matek", grade = "9. osztály", countyId = 2, teacherId = 1, studentId = 2 },
-                    new LessonModel() { id = 3, price = 3000, subject = "fizika", grade = "12. osztály", countyId = 1, teacherId = 2, studentId = 3 },
-                    new LessonModel() { id = 4, price = 5000, subject = "fizika", grade = "egyetem", countyId = 2, teacherId = 2, studentId = 2 },
-                    new LessonModel() { id = 5, price = 2000, subject = "tesi", grade = "bármelyik", countyId = 1, teacherId = 2, studentId = 3 }
+                    new LessonModel() { id = 1,teacherId = 1, studentId = 1 },
+                    new LessonModel() { id = 2, teacherId = 1, studentId = 2 },
+                    new LessonModel() { id = 3, teacherId = 2, studentId = 3 },
+                    new LessonModel() { id = 4, teacherId = 2, studentId = 2 },
+                    new LessonModel() { id = 5, teacherId = 2, studentId = 3 }
                 );
 
             // -------------- Seed End -------------- //

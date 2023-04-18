@@ -12,18 +12,21 @@ namespace WebAPI.Controllers
         {
             this.dbContext = dbContext;
         }
-        [HttpGet("get-all-teacher")]
-        public IActionResult Teachers()
+
+        [HttpGet("search-teacher")]
+        public IActionResult Search([FromQuery] string? subject, [FromQuery] string? grade, [FromQuery] int? countyId, [FromQuery] int? priceCategoryId)
         {
             return Ok(
-                dbContext.Set<TeacherModel>().Select(t=> new
-                {
-                    t.id,
-                    t.email,
-                    t.name,
-                    t.phoneNumber,
-                })
-            );
+            dbContext.Set<TeacherModel>()
+                .Where(t => (subject == null || t.subject.Contains(subject))
+                     && (grade == null || t.grade.Contains(grade))
+                     && (countyId == null || t.countyId == countyId)
+                     && (priceCategoryId == null ||
+                     ((t.price <= 500 && priceCategoryId==0) ||
+                     (t.price <= 1000 && priceCategoryId == 1) || 
+                     (t.price <= 1500 && priceCategoryId == 2) || 
+                     (t.price <= 2000 && priceCategoryId == 3) || 
+                     (t.price > 2000 && priceCategoryId == 4)))));
         }
     }
 }

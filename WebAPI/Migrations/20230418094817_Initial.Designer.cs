@@ -11,7 +11,7 @@ using WebAPI;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230418085007_Initial")]
+    [Migration("20230418094817_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -55,37 +55,16 @@ namespace WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("countyId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("grade")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<bool>("isOnline")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("price")
-                        .HasColumnType("int");
-
                     b.Property<int>("studentId")
                         .HasColumnType("int");
-
-                    b.Property<string>("subject")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
 
                     b.Property<int>("teacherId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
-
-                    b.HasIndex("countyId");
 
                     b.HasIndex("studentId");
 
@@ -97,61 +76,36 @@ namespace WebAPI.Migrations
                         new
                         {
                             id = 1,
-                            countyId = 1,
                             date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            grade = "8. osztály",
-                            isOnline = false,
-                            price = 2000,
                             studentId = 1,
-                            subject = "matek",
                             teacherId = 1
                         },
                         new
                         {
                             id = 2,
-                            countyId = 2,
                             date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            grade = "9. osztály",
-                            isOnline = false,
-                            price = 3000,
                             studentId = 2,
-                            subject = "matek",
                             teacherId = 1
                         },
                         new
                         {
                             id = 3,
-                            countyId = 1,
                             date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            grade = "12. osztály",
-                            isOnline = false,
-                            price = 3000,
                             studentId = 3,
-                            subject = "fizika",
                             teacherId = 2
                         },
                         new
                         {
                             id = 4,
-                            countyId = 2,
                             date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            grade = "egyetem",
-                            isOnline = false,
-                            price = 5000,
                             studentId = 2,
-                            subject = "fizika",
                             teacherId = 2
                         },
                         new
                         {
                             id = 5,
-                            countyId = 1,
                             date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            grade = "bármelyik",
-                            isOnline = false,
-                            price = 2000,
                             studentId = 3,
-                            subject = "tesi",
                             teacherId = 2
                         });
                 });
@@ -210,10 +164,21 @@ namespace WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("countyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
+
+                    b.Property<string>("grade")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<bool>("isOnline")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -224,7 +189,17 @@ namespace WebAPI.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("subject")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
                     b.HasKey("id");
+
+                    b.HasIndex("countyId");
 
                     b.ToTable("teachers");
 
@@ -232,27 +207,31 @@ namespace WebAPI.Migrations
                         new
                         {
                             id = 1,
+                            countyId = 1,
                             email = "bela@gmail.com",
+                            grade = "8. osztály",
+                            isOnline = false,
                             name = "Kis Béla",
-                            phoneNumber = "06706666969"
+                            phoneNumber = "06706666969",
+                            price = 2000,
+                            subject = "matek"
                         },
                         new
                         {
                             id = 2,
+                            countyId = 2,
                             email = "anna@gmail.com",
+                            grade = "9. osztály",
+                            isOnline = false,
                             name = "Nagy Anna",
-                            phoneNumber = "06304201234"
+                            phoneNumber = "06304201234",
+                            price = 3000,
+                            subject = "matek"
                         });
                 });
 
             modelBuilder.Entity("WebAPI.Models.LessonModel", b =>
                 {
-                    b.HasOne("WebAPI.Models.CountyModel", "county")
-                        .WithMany()
-                        .HasForeignKey("countyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WebAPI.Models.StudentModel", "student")
                         .WithMany()
                         .HasForeignKey("studentId")
@@ -265,11 +244,20 @@ namespace WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("county");
-
                     b.Navigation("student");
 
                     b.Navigation("teacher");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.TeacherModel", b =>
+                {
+                    b.HasOne("WebAPI.Models.CountyModel", "county")
+                        .WithMany()
+                        .HasForeignKey("countyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("county");
                 });
 #pragma warning restore 612, 618
         }
